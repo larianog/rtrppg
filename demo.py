@@ -42,7 +42,7 @@ def main_exp():
         RTRPPG.load_state_dict(checkpoint['model_state_dict'])
         current_path = os.getcwd()
         ## DATA MANAGER
-        path = os.path.abspath(os.path.join(current_path,'demo_subject\p1v1s1'))
+        path = os.path.abspath(os.path.join(current_path,'demo_subject/p1v1s1'))
 
         dataset = SubjectIndependentTestDataset(path) 
         dataloader = DataLoader(dataset, batch_size=1, drop_last=False, shuffle=False)
