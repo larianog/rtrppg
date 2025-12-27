@@ -41,13 +41,17 @@ def main_exp():
         checkpoint = torch.load('weights.pth.tar',map_location=torch.device('cpu'))
         RTRPPG.load_state_dict(checkpoint['model_state_dict'])
         current_path = os.getcwd()
+        
         ## DATA MANAGER
-        path = os.path.abspath(os.path.join(current_path,'demo_subject\p1v1s1'))
+        choice = "example" #or "p1v1s1"
+        path = os.path.abspath(os.path.join(current_path, f'demo_subject/{choice}'))
 
         dataset = SubjectIndependentTestDataset(path) 
         dataloader = DataLoader(dataset, batch_size=1, drop_last=False, shuffle=False)
 
-        GT = dataset.y_file # GT
+        if (choice == "p1v1s1"):
+            GT = dataset.y_file # GT
+        
         time = dataset.t_file # time
         window = dataset.window # Slinding window length
         rPPG = []
@@ -68,10 +72,16 @@ def main_exp():
         
         # PLOT
         fig, ax = plt.subplots()
-        plt.plot(time,GT),plt.plot(time,y_hat)
+        plt.plot(time,y_hat)
         plt.ylabel("Amplitude")
         plt.xlabel("Time [s]")
-        plt.legend(['ground truth','rPPG'])     
+    
+        if (choice == "p1v1s1"):
+            plt.plot(time,GT)
+            plt.legend(['ground truth','rPPG']) 
+        else:
+            plt.legend(['rPPG']) 
+        
         fig.savefig('Output.png', format='png', dpi=1200)
         print('[rtrppg demo]=>Output.png file saved in '+current_path)
         
