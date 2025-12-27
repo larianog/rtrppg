@@ -1,19 +1,4 @@
-# Codebase for "3DCNN-based Real-Time rPPG network (RTrPPG)"
-
-Original paper: [\[Paper link\]](https://drive.google.com/file/d/1lLTerHpAx0w3Xg2QxZCuI6wAxpuC0TCH/view?usp=sharing). 
-
-![](media/Experiments.png)
-
-## Model
-
-#### 3DCNN RTrPPG architecture:
-
-![](media/Architecture.png)
-
-#### Time-frequency based loss function NPSNR:
-
-![](media/NPSNR.png)
-
+# Playground for "3DCNN-based Real-Time rPPG network (RTrPPG)"
 
 ## Installation
 To install an anaconda virtual enviroment with the dependencies, you can run in your anaconda prompt:
@@ -21,14 +6,10 @@ To install an anaconda virtual enviroment with the dependencies, you can run in 
 conda env create -f \...\rtrppg\rtrppg_env.yaml
 ```
 
-### Build
-This project was tested with :
-- Windows 10
-- Anaconda 4.12.0
-- Python 3.9.12
-- Pytorch 1.10.2
-
 ## Usage
+
+### Video processing
+This repository has the example used in the demo of RTrPPG paper, in the demo_subject/p1v1s1 folder. However, if you want to run the model in your own example, you can add a video file in a new folder called video, and then use the video_processing.py function to create the necessary data format to run the demo.
 
 ### RTrPPG demo
 This demo uses the RTrPPG network trained on the VIPL-HR database [1] to generate an RPPG signal from a video of dimensions: Batch=1, Channels=3 (YUV), Time=128, Width = 8, Height = 8. The demo runs on CPU only so that it works on all hardware. However, changing the code to work on GPU is really easy (note to install the respective packages to work on GPU).
@@ -42,19 +23,7 @@ This demo generates the resulting RPPG signal and saves it in the repository fol
 
 ![](media/Output.png)
 
-## Citation
-
-If you find this code helpful in any way, please cite our paper:
-
-    @inproceedings{botina2022rtrppg,
-        title={RTrPPG: An Ultra Light 3DCNN for Real-Time Remote Photoplethysmography},
-        author={Botina-Monsalve, Deivid and Benezeth, Yannick and Miteran, Johel},
-        booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-        pages={2146--2154},
-        year={2022}
-    }
-
-RTrPPG is for research purposes only, and commercial use is not allowed.
+In this repository, it is also available a python notebook that can run the demo cell by cell, facilitating the debugging and viewing of the processing data.
 
 ## Acknowledgments
 
@@ -64,3 +33,4 @@ RTrPPG is for research purposes only, and commercial use is not allowed.
 ## References
 [1] Niu, Xuesong, Hu Han, Shiguang Shan, and Xilin Chen. "VIPL-HR: A multi-modal database for pulse estimation from less-constrained face video." In Asian conference on computer vision, pp. 562-576. Springer, Cham, 2018.
 
+[2] D. Botina-Monsalve, Y. Benezeth and J. Miteran, "RTrPPG: An Ultra Light 3DCNN for Real-Time Remote Photoplethysmography," 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW), New Orleans, LA, USA, 2022, pp. 2145-2153, doi: 10.1109/CVPRW56347.2022.00233.
