@@ -24,6 +24,7 @@ def create_dataset(video_path, dataset_path):
 
     save_video_to_numpy(video_path, dataset_path)
     extract_video_timestamps(video_path, dataset_path)
+    generate_gt_file(dataset_path)
     
     print(f"Successfully saved video")
 
@@ -131,6 +132,25 @@ def save_video_to_numpy(video_path, dataset_path):
     np.save(os.path.join(dataset_path, "example"), video_array) 
     
     print(f"Successfully saved video")
+
+def generate_gt_file(dataset_path):
+    """
+    Create a ground truth file filled with zeroes.
+
+    Args:
+        dataset_path (str): The dataset path containing the timestamp file.
+    """
+    # Open the file example_timestamp.txt
+    timestamp_filepath = os.path.join(dataset_path, "example_timestamp.txt")
+    
+    # Count the number of lines in the file
+    with open(timestamp_filepath, "r") as file_handle:
+        num_lines = sum(1 for _ in file_handle)
+    
+    # Create a new .txt file called "example_gt.txt" with the same number of lines, filled with zeroes
+    gt_filepath = os.path.join(dataset_path, "example_gt.txt")
+    with open(gt_filepath, "w") as file_handle:
+        file_handle.write('\n'.join(['0'] * num_lines))
 
 if __name__ == "__main__":
     main_exp()
